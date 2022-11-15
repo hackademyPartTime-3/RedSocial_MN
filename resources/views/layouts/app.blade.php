@@ -8,56 +8,59 @@
     <title>@yield('title')</title>
 
     <!-- cdn bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+<!--
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-
-    <!-- links icons bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+-->
+    <!-- links icons bootstrap 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"> 
+    -->
 
     <!-- link css propio -->
+    <!-- 
+    <link href="{{ asset ('/css/app.css') }}" rel="stylesheet" /> -->
 
-    <link href="{{ asset ('/css/app.css') }}" rel="stylesheet" />
-
+@vite (['resources/sass/app.scss','resources/css/app.css', 'resources/js/app.js','resources/js/redsocial.js'])
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <nav class="navbar navbar-expand-lg bg-success text-white sticky-top ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route ('home')}}">Inicio</a>
+            <a class="navbar-brand text-white" href="{{ route ('home')}}"><img src="{{ asset ('/img/img6.png')}}">Mi Blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route ('wall')}}">Ver</a>
+            <div class="collapse navbar-collapse " id="navbarNav">
+                <ul class="navbar-nav ">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="{{ route ('wall')}}">Muro</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route ('people')}}">Personas</a>
+                        <a class="nav-link text-white" href="{{ route ('people')}}">Personas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route ('contact') }}">Contacto</a>
+                        <a class="nav-link text-white" href="{{ route ('contact') }}">Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route ('about') }}">Acerca de</a>
+                        <a class="nav-link text-white" href="{{ route ('about') }}">Acerca de</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div style="margin-bottom: 80px" class="container-fluid">
+    <div style="margin-bottom: 250px;" class="container-fluid">
         <!--el contenido de mis páginas -->
    
-        @yield('content')        
-
+        @yield('content')
+    @isset($code) 
+    <x-flash-message code="{{$code}}" message="{{$message}}"/>
     </div>
-
+    @endisset    
     <footer class="d-flex flex-wrap justify-content-between  py-3 border-top text-white bg-success fixed-bottom">
         <div class="col-md-4 d-flex align-items-center">
             <span class="mb-3 mb-md-0 fs-6 ps-3">© Manuel Noriega 2022</span>

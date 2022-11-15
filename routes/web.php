@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WallController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,51 +22,9 @@ Route::get('/home',function () {
     return view('home');
 });
 
-Route::get ('/wall', function () {
-    $posts = [
-        ['id' =>2,
-        'title' => 'Primer post',
-        'content' =>'Contenido del primer post que hago con un array asociativo'],
-        ['id' =>5,
-        'title' => 'Segundo post',
-        'content' =>'Que good aprender CSS'],
-        ['id' =>8,
-        'title' => 'Tercer post',
-        'content' =>'Creando páginas con laravel'],
-        ['id' =>10,
-        'title' => 'Cuarto post',
-        'content' =>'Pues lo mejor es Bootstrap'],
-    ];
-   
-    return view ('wall', ['posts' => $posts ]);
-        
-})-> name ('wall');
+Route::get ('/wall',[WallController::class, 'index'])-> name ('wall');
 
-Route::get('/post/{id}',function ( $id ) {
-    $posts = [
-    ['id' =>2,
-    'title' => 'Primer post',
-    'content' =>'Contenido del primer post que hago con un array asociativo'],
-    ['id' =>5,
-    'title' => 'Segundo post',
-    'content' =>'Que good aprender CSS'],
-    ['id' =>8,
-    'title' => 'Tercer post',
-    'content' =>'Creando páginas con laravel'],
-    ['id' =>10,
-    'title' => 'Cuarto post',
-    'content' =>'Pues lo mejor es Bootstrap'],
-];
-$postDetalle = null;
-
-foreach ($posts as $post){
-    if ( $post ['id'] == $id ) {
-        $postDetalle = $post;
-    }
-}
-    return view('post',['post' => $postDetalle]);
-
-})->name ('post');
+Route::get('/post/{id}',[WallController::class, 'show'])->name ('post');
 
 
 Route::get ('/people', function () {
